@@ -25,6 +25,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rest-client', '1.7.2'
 gem 'passenger', '5.0.5'
+
+gem 'composite_primary_keys', '8.1.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

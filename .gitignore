@@ -12,3 +12,5 @@
 !/log/.keep
 /tmp
 config/*.yml
+.idea/
+*.lock
