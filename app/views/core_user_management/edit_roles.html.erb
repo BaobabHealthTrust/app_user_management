@@ -11,7 +11,8 @@
 %>&location_id=<%= params[:location_id] + (!params[:src].nil? ? "&src=#{params[:src]}" : "") %>';
 </script> padding-top: 10px;
 
-<form action="/add_user_roles" method='post'>
+<%= form_tag("/add_user_roles", :method => :post) do -%>
+<!--form action="/add_user_roles" method='post'-->
 
   <label for="roles">Roles</label>
   <%= select_tag("roles[]", options_for_select(@roles),
@@ -34,4 +35,6 @@
   <% end %>
 
   <%= submit_tag value="Submit"%>
-</form>
+<!--/form-->
+
+<% end %>

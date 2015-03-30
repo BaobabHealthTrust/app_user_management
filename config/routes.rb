@@ -4,9 +4,11 @@ Rails.application.routes.draw do
 
  get '/login' => 'core_user_management#login'
 
- get '/new_user/:id' => "core_user_management#new_user"
+ get '/new_user' => "core_user_management#new_user"
 
  get '/edit_user_status/:id' => "core_user_management#edit_user_status"
+
+ get '/edit_user_status' => "core_user_management#edit_user_status"
 
  post  '/create_user' => "core_user_management#create_user"
 
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
 
  post '/add_user_roles' => "core_user_management#add_user_roles"
 
- post '/void_role' => "core_user_management#void_role"
+ get '/void_role' => "core_user_management#void_role"
 
  get '/edit_user' => "core_user_management#edit_user"
 
@@ -32,7 +34,7 @@ Rails.application.routes.draw do
 
  post '/authenticate' => "core_user_management#authenticate"
 
- post '/logout/:id' => "core_user_management#logout"
+ get '/logout/:id' => "core_user_management#logout"
 
  get  '/verify/:id' => "core_user_management#verify"
 
