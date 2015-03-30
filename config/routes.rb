@@ -1,4 +1,61 @@
 Rails.application.routes.draw do
+
+ root 'core_user_management#select_user_task'
+
+ get '/login' => 'core_user_management#login'
+
+ get '/new_user/:id' => "core_user_management#new_user"
+
+ get '/edit_user_status/:id' => "core_user_management#edit_user_status"
+
+ post  '/create_user' => "core_user_management#create_user"
+
+ get '/user_list' => "core_user_management#user_list"
+
+ get '/select_user_task' => "core_user_management#select_user_task"
+
+ post '/update_user_status' => "core_user_management#update_user_status"
+
+ get  '/edit_roles' => "core_user_management#edit_roles"
+
+ post '/add_user_roles' => "core_user_management#add_user_roles"
+
+ post '/void_role' => "core_user_management#void_role"
+
+ get '/edit_user' => "core_user_management#edit_user"
+
+ post '/update_user' => "core_user_management#update_user"
+
+ get '/edit_password' => "core_user_management#edit_password"
+
+ post '/update_password' => "core_user_management#update_password"
+
+ post '/authenticate' => "core_user_management#authenticate"
+
+ post '/logout/:id' => "core_user_management#logout"
+
+ get  '/verify/:id' => "core_user_management#verify"
+
+ post '/location' => "core_user_management#location"
+
+ get '/location' => "core_user_management#location"
+
+ post '/location_update' => "core_user_management#location_update"
+
+ get '/location_update' => "core_user_management#location_update"
+
+ get '/user_demographics' => "core_user_management#user_demographics"
+
+ get '/remote_login' => "core_user_management#remote_login"
+
+ get '/remote_logout' => "core_user_management#remote_logout"
+
+ get '/remote_authentication' => "core_user_management#remote_authentication"
+
+ get '/get_wards' => "core_user_management#get_wards"
+
+ get '/get_user_names' => "core_user_management#get_user_names"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
