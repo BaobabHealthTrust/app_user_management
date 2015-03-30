@@ -758,7 +758,7 @@ class CoreUserManagementController < ApplicationController
 
   def remote_logout
 
-   user = CoreUserProperty.find_by_user_id_and_property(params[:id], "Token") rescue nil
+   user = CoreUserProperty.find_by_property_and_property_value("Token", params[:token]) rescue nil
 
    if user
     user.delete
