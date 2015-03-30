@@ -54,9 +54,19 @@ Rails.application.routes.draw do
 
  get '/remote_authentication' => "core_user_management#remote_authentication"
 
+ post '/remote_login' => "core_user_management#remote_login"
+
+ post '/remote_logout' => "core_user_management#remote_logout"
+
+ post '/remote_authentication' => "core_user_management#remote_authentication"
+
  get '/get_wards' => "core_user_management#get_wards"
 
  get '/get_user_names' => "core_user_management#get_user_names"
+
+ post '/get_wards' => "core_user_management#get_wards"
+
+ post '/get_user_names' => "core_user_management#get_user_names"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
