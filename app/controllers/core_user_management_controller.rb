@@ -1,8 +1,7 @@
 
 class CoreUserManagementController < ApplicationController
-  unloadable
 
-#  before_filter :__check_user, :except => [:login, :logout, :authenticate, :verify, :remote_login, :remote_logout, :remote_authentication, :get_wards, :get_user_names]
+  before_filter :__check_user, :except => [:login, :logout, :authenticate, :verify, :remote_login, :remote_logout, :remote_authentication, :get_wards, :get_user_names]
 
  # before_filter :__check_location, :except => [:login, :authenticate, :logout, :verify, :location, :location_update, :remote_login, :remote_logout, :remote_authentication, :get_wards,:get_user_names]
 
@@ -639,11 +638,15 @@ class CoreUserManagementController < ApplicationController
 
     if params[:location].strip.match(/^\d+$/)
 
-      @location = CoreLocation.find(:first, :conditions => ["location_id = ?", params[:location]]) rescue nil
+      # @location = CoreLocation.find(:first, :conditions => ["location_id = ?", params[:location]]) rescue nil
+
+      @location = CoreLocation.where("location_id = #{params[:location]}").first rescue nil
 
     else
 
-      @location = CoreLocation.find_by_name(params[:location]) rescue nil
+      # @location = CoreLocation.find_by_name(params[:location]) rescue nil
+
+      @location = CoreLocation.where(name: params[:location]).first rescue nil
 
     end
 

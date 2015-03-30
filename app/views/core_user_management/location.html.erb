@@ -19,7 +19,7 @@ function setupBarcode(){
 }
 
 function inform() {
-      $('infoBar'+tstCurrentPage).innerHTML = "<%= welcome_message %>";  
+      $('infoBar'+tstCurrentPage).innerHTML = "<%= welcome_message rescue nil %>";
     }           
 </script>
 
@@ -30,7 +30,9 @@ function inform() {
   }
 </style>
 
-<form id='location' action="/location_update" method='post'>
+<%= form_tag("/location_update", :method => :post) do -%>
+
+<!--form id='location' action="/location_update" method='post'-->
   <label for="location">Location</label>
   <%= text_field_tag(:location, nil,
     :helpText => "#{Vocabulary.search("Workstation location")}",
@@ -40,4 +42,6 @@ function inform() {
   <%= hidden_field_tag "src", "#{@destination}" %>
   <br />
   <%= submit_tag :value => "Submit" %>
-</form>
+<!--/form-->
+
+<% end %>
