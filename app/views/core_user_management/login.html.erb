@@ -3,11 +3,12 @@
   tt_cancel_destination = '/login';
   tt_cancel_show = '/login';
   function inform() {
-      $('infoBar'+tstCurrentPage).innerHTML = "<%= welcome_message %>";  
+      $('infoBar'+tstCurrentPage).innerHTML = "<%= welcome_message rescue nil %>";
     }  
 </script> padding-top: 10px;
 
-<form id='sessions' action="/authenticate" method='post'>
+<%= form_tag("/authenticate", :method => :post) do -%>
+<!--form id='sessions' action="/authenticate" method='post'-->
 
   <label for="login">Enter Username</label>
   <%= text_field_tag(:login, nil, :helpText => "#{Vocabulary.search("Enter Username")}",
@@ -22,4 +23,6 @@
   <%= hidden_field_tag "src", "#{params[:src]}" %>
 
   <%= submit_tag value="Submit"%>
-</form>
+<!--/form-->
+
+<% end %>
