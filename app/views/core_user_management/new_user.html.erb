@@ -11,7 +11,8 @@ params[:location_id] + (!params[:src].nil? ? "&src=#{params[:src]}" : "") %>';
 params[:location_id] + (!params[:src].nil? ? "&src=#{params[:src]}" : "") %>';
 </script> padding-top: 10px;
 
-<form action="/create_user" method='post'>
+<%= form_tag("/create_user", :method => :post) do -%>
+<!--form action="/create_user" method='post'-->
 
   <label for="first_name">First name</label>
   <%= text_field_tag(:first_name, params[:first_name], :helpText => "#{Vocabulary.search("First Name")}") %>
@@ -58,4 +59,6 @@ params[:location_id] + (!params[:src].nil? ? "&src=#{params[:src]}" : "") %>';
   <% end %>
 
   <%= submit_tag value="Submit"%>
-</form>
+<!--/form-->
+
+<% end %>

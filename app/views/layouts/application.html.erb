@@ -14,7 +14,7 @@
           "Delete", "Space", "cap", "Yes", "No", "Unknown", "Next", "Processing. Please Wait",
           "Please enter a valid value", "You must enter a value to continue", "Authorise",
           "Value bigger than maximum", "Value smaller than minimum", "Value out of Range",
-          "Are you sure you want to Cancel"].collect{|e| "\"#{e.downcase}\":\"#{Vocabulary.search(e)}\""}.join(",")
+          "Are you sure you want to Cancel"].collect{|e| "\"#{e.downcase}\":\"#{Vocabulary.search(e)}\""}.join(",").html_safe
        %>};
 
       tstCurrentDate = "<%= (session[:datetime] ? session[:datetime].to_date.strftime("%Y-%m-%d") :

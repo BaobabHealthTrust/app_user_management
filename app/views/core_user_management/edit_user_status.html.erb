@@ -6,7 +6,8 @@ params[:location_id] + (!params[:src].nil? ? "&src=#{params[:src]}" : "") %>';
 params[:location_id] + (!params[:src].nil? ? "&src=#{params[:src]}" : "") %>';
 </script>
 
-<form action="/update_user_status" method='post'>
+<%= form_tag("/update_user_status", :method => :post) do -%>
+<!--form action="/update_user_status" method='post'-->
 
   <%= hidden_field_tag "user_id", "#{@user.id}" %>
 
@@ -25,4 +26,6 @@ params[:location_id] + (!params[:src].nil? ? "&src=#{params[:src]}" : "") %>';
       ["#{Vocabulary.search("Pending")}", "PENDING"], ["#{Vocabulary.search("Blocked")}", "BLOCKED"]]),
     :helpText => "#{Vocabulary.search("Set status for")} #{(!@target.name.blank? ? @target.name : "" )}") %>
 
-</form>
+<!--/form-->
+
+<% end %>

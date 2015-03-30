@@ -83,17 +83,7 @@ class CoreUserManagementController < ApplicationController
 
   def authenticate
 
-    user = CoreUser.authenticate(params[:login], params[:password]) # rescue nil
-
-    if user.blank?
-      old_user = OtherUser.check_authenticity(params[:password], params[:login])  #rescue nil
-      if ! old_user.blank?
-        other_person = OpenmrsPersonName.find_by_person_id(old_user.person_id)
-        roles =  old_user.user_roles.collect { |role| role.role }.sort.uniq
-        remote_user = create_remotely(params[:login], params[:password], other_person.given_name, other_person.family_name, OpenmrsPerson.find(old_user.person_id).gender, roles)
-        user = CoreUser.find(remote_user)
-      end
-    end
+    user = CoreUser.authenticate(params[:login], params[:password]) rescue nil
 
     if user.nil?
       flash[:error] = "Wrong username or password!"
@@ -136,7 +126,7 @@ class CoreUserManagementController < ApplicationController
   end
 
   def new_user
-    @roles = CoreRole.find(:all).collect{|r| Vocabulary.search(r.role)}
+    @roles = CoreRole.all.collect{|r| Vocabulary.search(r.role)}
   end
 
   def create_user
@@ -245,7 +235,7 @@ class CoreUserManagementController < ApplicationController
       end
     end
 
-    @users = CoreUser.find(:all).collect { |user|
+    @users = CoreUser.all.collect { |user|
       [
         user.name,
         user.username,
@@ -308,7 +298,7 @@ class CoreUserManagementController < ApplicationController
 
     current_roles = @target.user_roles.collect{|r| Vocabulary.search(r.role)}
 
-    @roles = CoreRole.find(:all).collect{|r| Vocabulary.search(r.role)} - current_roles
+    @roles = CoreRole.all.collect{|r| Vocabulary.search(r.role)} - current_roles
 
   end
 
@@ -574,7 +564,7 @@ class CoreUserManagementController < ApplicationController
 
     request_link = params[:ext]? request.referrer.split("?").first  : ""
 
-    user = CoreUserProperty.find_by_user_id_and_property(params[:id], "Token") rescue nil
+    user = CoreUserProperty.where(user_id: params[:id], property: "Token").first rescue nil
 
     file = "#{File.expand_path("#{Rails.root}/tmp", __FILE__)}/user.#{session[:user_id]}.yml" rescue ""
 
