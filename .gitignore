@@ -14,3 +14,5 @@
 config/*.yml
 .idea/
 *.lock
+*~
+public/touchscreentoolkit/*
