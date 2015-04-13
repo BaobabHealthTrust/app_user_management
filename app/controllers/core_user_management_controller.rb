@@ -1,9 +1,11 @@
 
 class CoreUserManagementController < ApplicationController
 
-  before_filter :__check_user, :except => [:login, :logout, :authenticate, :verify, :remote_login, :remote_logout, :remote_authentication, :get_wards, :get_user_names]
+  before_filter :__check_user, :except => [:login, :logout, :authenticate, :verify, :remote_login, :remote_logout, :remote_authentication, :get_wards, :get_user_names, :update_credentials]
 
- # before_filter :__check_location, :except => [:login, :authenticate, :logout, :verify, :location, :location_update, :remote_login, :remote_logout, :remote_authentication, :get_wards,:get_user_names]
+  before_filter :__http_auth, :only => [:remote_login, :remote_logout, :remote_authentication, :get_wards, :get_user_names, :update_credentials]
+
+  # before_filter :__check_location, :except => [:login, :authenticate, :logout, :verify, :location, :location_update, :remote_login, :remote_logout, :remote_authentication, :get_wards,:get_user_names]
 
   def login
 
@@ -781,10 +783,32 @@ class CoreUserManagementController < ApplicationController
    end
    render :text => results.to_json
   end
+
+  def update_credentials
+   old = CoreUser.authenticate(params[:username], params[:old_password]) # rescue nil
+
+   if old.blank?
+    msg = "Error: Invalid current password!"
+
+   else
+    user = CoreUser.find_by_username(params[:username]) #rescue nil
+    if !user.blank?
+
+     user.update_attributes(:password => params[:password])
+
+     msg =  "Password updated!"
+
+    else
+      msg = "Error: username doesn't exist"
+    end
+   end
+
+   render :text => msg.to_json
+  end
   protected
   
   def __check_user
-    
+
     token = session[:token] rescue nil
     
     if token.blank?
@@ -809,4 +833,9 @@ class CoreUserManagementController < ApplicationController
     
   end
 
+  def __http_auth
+   authenticate_or_request_with_http_basic do |username, password|
+    CoreUser.authenticate(username, password)
+   end
+  end
 end

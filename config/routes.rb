@@ -68,6 +68,8 @@ Rails.application.routes.draw do
 
  post '/get_user_names' => "core_user_management#get_user_names"
 
+ post '/update_credentials' => "core_user_management#update_credentials"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
