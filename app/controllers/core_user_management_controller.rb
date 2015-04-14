@@ -785,16 +785,17 @@ class CoreUserManagementController < ApplicationController
   end
 
   def update_credentials
-   old = CoreUser.authenticate(params[:username], params[:old_password]) # rescue nil
+   username, password = ActionController::HttpAuthentication::Basic::user_name_and_password(request)
+   old = CoreUser.authenticate(username, password) # rescue nil
 
    if old.blank?
     msg = {"ERROR" =>"Invalid current password!"}
 
    else
-    user = CoreUser.find_by_username(params[:username]) #rescue nil
+    user = CoreUser.find_by_username(username) #rescue nil
     if !user.blank?
 
-     user.update_attributes(:password => params[:password])
+     user.update_attributes(:password => params[:new_password])
 
      msg =  {"MSG" =>"Password updated!"}
 
