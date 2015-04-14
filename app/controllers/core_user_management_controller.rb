@@ -3,7 +3,7 @@ class CoreUserManagementController < ApplicationController
 
   before_filter :__check_user, :except => [:login, :logout, :authenticate, :verify, :remote_login, :remote_logout, :remote_authentication, :get_wards, :get_user_names, :update_credentials]
 
-  before_filter :__http_auth, :only => [:remote_login, :remote_logout, :remote_authentication, :get_wards, :get_user_names, :update_credentials]
+  before_filter :__http_auth, :only => [:remote_logout,:remote_authentication, :get_wards, :get_user_names, :update_credentials]
 
   # before_filter :__check_location, :except => [:login, :authenticate, :logout, :verify, :location, :location_update, :remote_login, :remote_logout, :remote_authentication, :get_wards,:get_user_names]
 
