@@ -788,7 +788,7 @@ class CoreUserManagementController < ApplicationController
    old = CoreUser.authenticate(params[:username], params[:old_password]) # rescue nil
 
    if old.blank?
-    msg = "Error: Invalid current password!"
+    msg = {"ERROR" =>"Invalid current password!"}
 
    else
     user = CoreUser.find_by_username(params[:username]) #rescue nil
@@ -796,10 +796,10 @@ class CoreUserManagementController < ApplicationController
 
      user.update_attributes(:password => params[:password])
 
-     msg =  "Password updated!"
+     msg =  {"MSG" =>"Password updated!"}
 
     else
-      msg = "Error: username doesn't exist"
+      msg = {"ERROR" => "Username doesn't exist"}
     end
    end
 
